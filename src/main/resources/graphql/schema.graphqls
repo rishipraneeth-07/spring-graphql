@@ -1,0 +1,36 @@
+type Student {
+    id: ID!
+    name: String!
+    age: Int!
+    email: String!
+    cgpa: Float
+}
+
+type Query {
+
+    student(id: ID!): Student
+
+    students: [Student!]!
+
+}
+
+type Mutation {
+
+    createStudent(
+        name: String!
+        age: Int!
+        email: String!
+        cgpa: Float
+    ): Student
+
+    updateStudent(
+        id: ID!
+        name: String!
+        age: Int!
+        email: String!
+        cgpa: Float
+    ): Student
+
+    deleteStudent(id: ID!): Student
+
+}

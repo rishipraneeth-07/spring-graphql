@@ -16,4 +16,12 @@ public class GlobalExceptionHandler {
                 .errorType(ErrorType.DataFetchingException)
                 .build();
     }
+
+    @GraphQlExceptionHandler
+    public GraphQLError handleEmailAlreadyExistsException(EmailAlreadyExistsException e) {
+        return GraphqlErrorBuilder.newError()
+                .message(e.getMessage())
+                .errorType(ErrorType.ValidationError)
+                .build();
+    }
 }

@@ -20,4 +20,5 @@ type Query {
 
 type Mutation {
     createStudent(student: StudentInput!): Student
+    updateStudent(id:ID!,student:StudentInput!):Student
 }

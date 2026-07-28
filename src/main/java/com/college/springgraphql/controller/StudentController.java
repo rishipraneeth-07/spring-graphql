@@ -30,4 +30,9 @@ public class StudentController {
     public Student createStudent(@Argument StudentInput  student) {
         return studentService.createStudent(student);
     }
+
+    @MutationMapping(name = "updateStudent")
+    public Student updateStudent(@Argument Long id, @Argument StudentInput student) {
+        return studentService.updateStudent(id, student);
+    }
 }

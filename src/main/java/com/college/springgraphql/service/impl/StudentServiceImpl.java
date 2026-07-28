@@ -43,4 +43,28 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+
+    @Override
+    public Student updateStudent(Long id, StudentInput studentInput) {
+
+        Student student = getStudentById(id);
+
+        if (!student.getEmail().equals(studentInput.getEmail())) {
+
+            Student existingStudent = studentRepository.findByEmail(studentInput.getEmail());
+
+            if (existingStudent != null) {
+                throw new EmailAlreadyExistsException(
+                        "Email already exists: " + studentInput.getEmail());
+            }
+
+            student.setEmail(studentInput.getEmail());
+        }
+
+        student.setName(studentInput.getName());
+        student.setAge(studentInput.getAge());
+        student.setCgpa(studentInput.getCgpa());
+
+        return studentRepository.save(student);
+    }
 }

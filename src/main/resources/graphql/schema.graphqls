@@ -13,9 +13,19 @@ input StudentInput {
     cgpa: Float
 }
 
+type StudentPage {
+    content: [Student!]!
+    totalElements: Int!
+    totalPages: Int!
+    pageNumber: Int!
+    pageSize: Int!
+    first: Boolean!
+    last: Boolean!
+}
+
 type Query {
     student(id: ID!): Student
-    students: [Student!]!
+    students(page: Int!, size: Int!): StudentPage!
 }
 
 type Mutation {

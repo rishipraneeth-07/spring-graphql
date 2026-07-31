@@ -1,6 +1,7 @@
 package com.college.springgraphql.controller;
 
 import com.college.springgraphql.dto.StudentInput;
+import com.college.springgraphql.dto.StudentPage;
 import com.college.springgraphql.entity.Student;
 import com.college.springgraphql.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class StudentController {
     }
 
     @QueryMapping(name = "students")
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public StudentPage getAllStudents(@Argument int page, @Argument int size) {
+        return studentService.getAllStudents(page, size);
     }
 
     @MutationMapping(name = "createStudent")

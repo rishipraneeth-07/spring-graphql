@@ -1,12 +1,16 @@
 package com.college.springgraphql.service.impl;
 
 import com.college.springgraphql.dto.StudentInput;
+import com.college.springgraphql.dto.StudentPage;
 import com.college.springgraphql.entity.Student;
 import com.college.springgraphql.exception.EmailAlreadyExistsException;
 import com.college.springgraphql.exception.StudentNotFoundException;
 import com.college.springgraphql.repository.StudentRepository;
 import com.college.springgraphql.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +44,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public StudentPage getAllStudents(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Student> students = studentRepository.findAll(pageable);
+
+        return StudentPage.builder()
+                .content(students.getContent())
+                .totalElements(students.getTotalElements())
+                .totalPages(students.getTotalPages())
+                .pageNumber(students.getNumber())
+                .pageSize(students.getSize())
+                .first(students.isFirst())
+                .last(students.isLast())
+                .build();
     }
 
     @Override

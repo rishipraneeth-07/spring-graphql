@@ -25,11 +25,25 @@ type StudentPage {
 
 type Query {
     student(id: ID!): Student
-    students(page: Int!, size: Int!): StudentPage!
+    students(page: Int!, size: Int!,sortBy: StudentSortField!,direction: SortDirection!
+    ): StudentPage!
 }
 
 type Mutation {
     createStudent(student: StudentInput!): Student
     updateStudent(id:ID!,student:StudentInput!):Student
     deleteStudent(id:ID!):Boolean!
+}
+
+enum StudentSortField {
+    ID
+    NAME
+    AGE
+    EMAIL
+    CGPA
+}
+
+enum SortDirection {
+    ASC
+    DESC
 }

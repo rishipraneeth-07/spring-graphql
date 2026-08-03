@@ -3,6 +3,8 @@ package com.college.springgraphql.controller;
 import com.college.springgraphql.dto.StudentInput;
 import com.college.springgraphql.dto.StudentPage;
 import com.college.springgraphql.entity.Student;
+import com.college.springgraphql.enums.SortDirection;
+import com.college.springgraphql.enums.StudentSortField;
 import com.college.springgraphql.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -23,8 +25,18 @@ public class StudentController {
     }
 
     @QueryMapping(name = "students")
-    public StudentPage getAllStudents(@Argument int page, @Argument int size) {
-        return studentService.getAllStudents(page, size);
+    public StudentPage getAllStudents(
+            @Argument int page,
+            @Argument int size,
+            @Argument StudentSortField sortBy,
+            @Argument SortDirection direction
+    ) {
+        return studentService.getAllStudents(
+                page,
+                size,
+                sortBy,
+                direction
+        );
     }
 
     @MutationMapping(name = "createStudent")

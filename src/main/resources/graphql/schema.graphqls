@@ -4,6 +4,15 @@ type Student {
     age: Int!
     email: String!
     cgpa: Float
+    department: Department
+}
+
+type Department {
+    id: ID!
+    name: String!
+    hod: String
+    building: String
+    students: [Student!]!
 }
 
 input StudentInput {

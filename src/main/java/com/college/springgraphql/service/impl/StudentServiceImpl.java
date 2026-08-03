@@ -3,6 +3,8 @@ package com.college.springgraphql.service.impl;
 import com.college.springgraphql.dto.StudentInput;
 import com.college.springgraphql.dto.StudentPage;
 import com.college.springgraphql.entity.Student;
+import com.college.springgraphql.enums.SortDirection;
+import com.college.springgraphql.enums.StudentSortField;
 import com.college.springgraphql.exception.EmailAlreadyExistsException;
 import com.college.springgraphql.exception.StudentNotFoundException;
 import com.college.springgraphql.repository.StudentRepository;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,9 +47,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentPage getAllStudents(int page, int size) {
+    public StudentPage getAllStudents(
+            int page,
+            int size,
+            StudentSortField sortBy,
+            SortDirection direction
+    ) {
 
-        Pageable pageable = PageRequest.of(page, size);
+        Sort.Direction springDirection =
+                Sort.Direction.valueOf(direction.name());
+
+        Sort sort = Sort.by(
+                springDirection,
+                sortBy.getFieldName()
+        );
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                sort
+        );
 
         Page<Student> students = studentRepository.findAll(pageable);
 

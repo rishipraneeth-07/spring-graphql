@@ -24,4 +24,24 @@ public class GlobalExceptionHandler {
                 .errorType(ErrorType.ValidationError)
                 .build();
     }
+
+    @GraphQlExceptionHandler(DepartmentNotFoundException.class)
+    public GraphQLError handleDepartmentNotFound(
+            DepartmentNotFoundException ex) {
+
+        return GraphqlErrorBuilder.newError()
+                .message(ex.getMessage())
+                .errorType(ErrorType.DataFetchingException)
+                .build();
+    }
+
+    @GraphQlExceptionHandler(DepartmentAlreadyExistsException.class)
+    public GraphQLError handleDepartmentAlreadyExists(
+            DepartmentAlreadyExistsException ex) {
+
+        return GraphqlErrorBuilder.newError()
+                .message(ex.getMessage())
+                .errorType(ErrorType.ValidationError)
+                .build();
+    }
 }

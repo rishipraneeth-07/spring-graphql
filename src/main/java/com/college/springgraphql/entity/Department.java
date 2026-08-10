@@ -3,6 +3,8 @@ package com.college.springgraphql.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "departments")
 @Getter
@@ -24,4 +26,7 @@ public class Department {
 
     @Column(nullable = false)
     private String building;
+
+    @OneToMany(mappedBy = "department")
+    private List<Student> students;
 }

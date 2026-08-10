@@ -25,4 +25,6 @@ public class StudentInput {
     @Min(value = 0, message = "CGPA cannot be negative")
     @Max(value = 10, message = "CGPA cannot be greater than 10")
     private Double cgpa;
+
+    private Long departmentId;
 }

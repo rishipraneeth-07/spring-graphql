@@ -20,6 +20,7 @@ input StudentInput {
     age: Int!
     email: String!
     cgpa: Float
+    departmentId: ID
 }
 
 type StudentPage {

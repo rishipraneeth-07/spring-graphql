@@ -2,11 +2,14 @@ package com.college.springgraphql.service.impl;
 
 import com.college.springgraphql.dto.StudentInput;
 import com.college.springgraphql.dto.StudentPage;
+import com.college.springgraphql.entity.Department;
 import com.college.springgraphql.entity.Student;
 import com.college.springgraphql.enums.SortDirection;
 import com.college.springgraphql.enums.StudentSortField;
+import com.college.springgraphql.exception.DepartmentNotFoundException;
 import com.college.springgraphql.exception.EmailAlreadyExistsException;
 import com.college.springgraphql.exception.StudentNotFoundException;
+import com.college.springgraphql.repository.DepartmentRepository;
 import com.college.springgraphql.repository.StudentRepository;
 import com.college.springgraphql.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -16,27 +19,33 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
+    private final DepartmentRepository departmentRepository;
     @Override
     public Student createStudent(StudentInput studentInput) {
-        Student existingStudent = studentRepository.findByEmail(studentInput.getEmail());
-
-        if (existingStudent != null) {
-            throw new EmailAlreadyExistsException(
-                    "Email already exists: " + studentInput.getEmail());
-        }
         Student student = new Student();
+
         student.setName(studentInput.getName());
         student.setAge(studentInput.getAge());
         student.setEmail(studentInput.getEmail());
         student.setCgpa(studentInput.getCgpa());
-        Student savedStudent=studentRepository.save(student);
-        return  savedStudent;
+
+        if (studentInput.getDepartmentId() != null) {
+
+            Department department = departmentRepository.findById(
+                    studentInput.getDepartmentId()
+            ).orElseThrow(
+                    () -> new DepartmentNotFoundException("Department not found")
+            );
+
+            student.setDepartment(department);
+        }
+
+        return studentRepository.save(student);
     }
 
     @Override

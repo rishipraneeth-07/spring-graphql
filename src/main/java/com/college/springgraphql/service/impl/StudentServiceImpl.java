@@ -93,25 +93,38 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student updateStudent(Long id, StudentInput studentInput) {
 
-        Student student = getStudentById(id);
+        Student studentBefore = studentRepository.findById(id)
+                .orElseThrow(
+                        () -> new StudentNotFoundException("Student not found")
+                );
 
-        if (!student.getEmail().equals(studentInput.getEmail())) {
+        if (!studentBefore.getEmail().equals(studentInput.getEmail())) {
 
-            Student existingStudent = studentRepository.findByEmail(studentInput.getEmail());
+            Student studentAfter =
+                    studentRepository.findByEmail(studentInput.getEmail());
 
-            if (existingStudent != null) {
-                throw new EmailAlreadyExistsException(
-                        "Email already exists: " + studentInput.getEmail());
+            if (studentAfter != null) {
+                throw new EmailAlreadyExistsException("Email already exists");
             }
-
-            student.setEmail(studentInput.getEmail());
         }
 
-        student.setName(studentInput.getName());
-        student.setAge(studentInput.getAge());
-        student.setCgpa(studentInput.getCgpa());
+        studentBefore.setName(studentInput.getName());
+        studentBefore.setAge(studentInput.getAge());
+        studentBefore.setEmail(studentInput.getEmail());
+        studentBefore.setCgpa(studentInput.getCgpa());
 
-        return studentRepository.save(student);
+        if (studentInput.getDepartmentId() != null) {
+
+            Department department = departmentRepository.findById(
+                    studentInput.getDepartmentId()
+            ).orElseThrow(
+                    () -> new DepartmentNotFoundException("Department not found")
+            );
+
+            studentBefore.setDepartment(department);
+        }
+
+        return studentRepository.save(studentBefore);
     }
 
     @Override

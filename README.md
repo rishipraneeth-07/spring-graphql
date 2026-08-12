@@ -89,6 +89,18 @@ The project demonstrates how to build and structure a GraphQL API using Spring B
 
 ---
 
+## Future Learning
+
+- @SchemaMapping
+- N+1 query problem
+- DataLoader
+- GraphQL subscriptions
+- Advanced filtering
+- GraphQL directives
+- Authentication and authorization
+- GraphQL testing
+
+
 ##  Project Architecture
 
 The project follows a layered backend architecture:
@@ -125,13 +137,4 @@ The project follows a layered backend architecture:
                 └─────────────────┘
 
 
-## Future Learning
 
-- @SchemaMapping
-- N+1 query problem
-- DataLoader
-- GraphQL subscriptions
-- Advanced filtering
-- GraphQL directives
-- Authentication and authorization
-- GraphQL testing

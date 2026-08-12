@@ -123,3 +123,15 @@ The project follows a layered backend architecture:
                 ┌─────────────────┐
                 │      MySQL      │
                 └─────────────────┘
+
+
+## Future Learning
+
+- @SchemaMapping
+- N+1 query problem
+- DataLoader
+- GraphQL subscriptions
+- Advanced filtering
+- GraphQL directives
+- Authentication and authorization
+- GraphQL testing

@@ -136,5 +136,5 @@ The project follows a layered backend architecture:
                 │      MySQL      │
                 └─────────────────┘
 
-
+------------------------
 

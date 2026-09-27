@@ -72,6 +72,72 @@ The project demonstrates how to build and structure a GraphQL API using Spring B
 
 ---
 
+GraphQL API Examples
+
+1. Get Student by ID
+
+query {
+  getStudentById(id: 1) {
+    id
+    name
+    age
+    cgpa
+    department {
+      id
+      name
+    }
+  }
+}
+
+2. Create a Student
+
+mutation {
+  createStudent(input: {
+    name: "Rishi"
+    age: 20
+    cgpa: 8.5
+  }) {
+    id
+    name
+    age
+    cgpa
+  }
+}
+
+3. Get All Students
+
+query {
+  getAllStudents {
+    id
+    name
+    cgpa
+  }
+}
+
+4. Update Student
+
+mutation {
+  updateStudent(id: 1, input: {
+    name: "Rishi Praneeth"
+    age: 21
+    cgpa: 9.0
+  }) {
+    id
+    name
+    age
+    cgpa
+  }
+}
+
+5. Delete Student
+
+mutation {
+  deleteStudent(id: 1)
+}
+
+
+---
+
 ## Tech Stack
 
 | Technology | Purpose |

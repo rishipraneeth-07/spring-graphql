@@ -14,9 +14,6 @@ This project is a learning-focused GraphQL backend that provides APIs for managi
 - Departments
 - Student–Department relationships
 
-Unlike traditional REST APIs where clients typically consume predefined endpoints and response structures, GraphQL allows clients to request exactly the fields they need through a strongly typed schema.
-
-The project demonstrates how to build and structure a GraphQL API using Spring Boot and Spring Data JPA.
 
 ---
 

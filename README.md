@@ -54,18 +54,7 @@ This project is a learning-focused GraphQL backend that provides APIs for managi
 - Nested object types
 - Student–Department relationship
 
-### Spring Boot Features
 
-- Layered architecture
-- DTO-based API design
-- Service layer
-- Repository layer
-- Manual entity-to-DTO mapping
-- Bean Validation
-- Custom exceptions
-- Global GraphQL exception handling
-- Spring Data JPA
-- MySQL persistence
 
 ---
 

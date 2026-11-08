@@ -115,11 +115,6 @@ mutation {
   }
 }
 
-5. Delete Student
-
-mutation {
-  deleteStudent(id: 1)
-}
 
 
 ---
